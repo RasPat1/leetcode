@@ -2,6 +2,29 @@
 # @param {Integer} target
 # @return {Integer[]}
 def two_sum(nums, target)
+  # For each value check if the complement was seen
+  # If it was not seen, add the current number and
+  # it's index to a map of seen values and their indexes
+  # Otherwise return the current index and the
+  # complement's index
+  seen_values = {}
+  nums.each_with_index do |num, index|
+    complement = target - num
+    if complement in seen_values
+      complement_index = seen_values[complement]
+      return [index, complement_index]
+    else
+      seen_values[num] = index
+    end
+  end
+
+  return -1;
+end
+
+# @param {Integer[]} nums
+# @param {Integer} target
+# @return {Integer[]}
+def two_sum_too_complicated(nums, target)
     # Pass 1: Create a map from value => [index (n)]
     # Sort the array (nlgn)
     # Pass 2: Walk the array from both sides
